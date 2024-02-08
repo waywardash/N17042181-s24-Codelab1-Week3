@@ -10,10 +10,14 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public int score = 0;
+    
+    
 
     public int targetScore = 3;
     
     public TextMeshProUGUI scoreText;
+
+    int levelNum = 1;
     
     void Awake()
     {
@@ -37,11 +41,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Level: " + levelNum + "\nScore: " + score + "\nHigh Score: ";
         
         //when score reaches target score, we go to the next level
         if (score == targetScore)
         {
+            levelNum++;
             SceneManager.LoadScene(
                 SceneManager.GetActiveScene().buildIndex + 1);
             targetScore = Mathf.RoundToInt(targetScore + targetScore * 1.5f);
