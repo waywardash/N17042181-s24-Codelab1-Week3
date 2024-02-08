@@ -1,25 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager instance;
 
     public int score = 0;
 
     public int targetScore = 3;
-
+    
     public TextMeshProUGUI scoreText;
+    
     void Awake()
     {
-        if (Instance == null) //if the instance var has not been set yet.
+        if (instance == null) //if the instance var has not been set
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else //if there is already a singleton of this type
@@ -37,13 +37,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "score " + score;
+        scoreText.text = "Score: " + score;
+        
+        //when score reaches target score, we go to the next level
         if (score == targetScore)
         {
-            SceneManager.LoadScene("Level2");
-            targetScore *= Mathf.RoundToInt(targetScore + targetScore * 1.5f);
-            score = 0;
+            SceneManager.LoadScene(
+                SceneManager.GetActiveScene().buildIndex + 1);
+            targetScore = Mathf.RoundToInt(targetScore + targetScore * 1.5f);
         }
     }
 }
- 
