@@ -40,7 +40,7 @@ public class FireController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        GameManager.instance.score++; // increasing score.
+        GameManager.instance.Score++; // increasing score.
         
         audioSource.Play();
         
